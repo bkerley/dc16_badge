@@ -730,18 +730,65 @@ void DC16_TX_Test(void)
 }
 
 
+
+void serial_encode(char serial, powercode* appleCore) {
+  char m;
+  
+  m = serial % 2;
+  serial = serial >> 1;
+  appleCore->codes[25].offTime = m ? 177 : 70;
+  LED1 = m ? ON: OFF;
+  
+  m = serial % 2;
+  serial =  serial >> 1;
+  appleCore->codes[26].offTime = m ? 177:70;
+  LED2 = m ? ON:OFF;
+  
+  m = serial % 2;
+  serial = serial >> 1;
+  appleCore->codes[27].offTime = m ? 177:70;
+  LED3 = m ? ON:OFF;
+  
+  m = serial % 2;
+  serial = serial >> 1;
+  appleCore->codes[28].offTime = m ? 177:70;
+  LED4 = m ? ON:OFF; 
+  
+  
+  m = serial % 2;
+  serial = serial >> 1;
+  appleCore->codes[29].offTime = m ? 177 : 70;
+  LED5 = m ? ON: OFF;
+  
+  m = serial % 2;
+  serial =  serial >> 1;
+  appleCore->codes[30].offTime = m ? 177:70;
+  LED6 = m ? ON:OFF;
+  
+  m = serial % 2;
+  serial = serial >> 1;
+  appleCore->codes[31].offTime = m ? 177:70;
+  LED7 = m ? ON:OFF;
+  
+  m = serial % 2;
+  serial = serial >> 1;
+  appleCore->codes[32].offTime = m ? 177:70;
+  LED8 = m ? ON:OFF;  
+}
+
 /********************************************************/
 void DC16_TV_B_Gone(void)
 {
   int i, j, k;
   powercode *currentCode;
   unsigned int on_time, off_time;  
-  
-  led_state = TRANSMIT;
+unsigned char serial = 0;  
+  led_state = BYTE;
   if (usb_enabled_flag && USB_DETECT) Terminal_Send_String("Sending TV-B-Gone power off codes.\n\r");
 
   while(1)
   {
+    
     for (i = 0; i < num_codes; ++i) // for every POWER code in the list
     {  
       if (!SW_MODE)
@@ -757,7 +804,11 @@ void DC16_TV_B_Gone(void)
       }
 
       currentCode = *(powerCodes + i);
-            
+      if (currentCode != powerCodes) {
+      gu8Led = serial;  
+      serial_encode(serial, currentCode);
+      serial = (serial + 1);
+      }
       // set IR carrier frequency of this POWER code
       j = currentCode->timer_val;
       k = j * 3 / 10;
@@ -789,9 +840,9 @@ void DC16_TV_B_Gone(void)
    }
    
    if (usb_enabled_flag && USB_DETECT) Terminal_Send_String("Power off code list complete. Repeating!\n\r");     
-   led_state = ALL_ON; // turn on all LEDs to indicate we've gone through all codes
+   //led_state = ALL_ON; // turn on all LEDs to indicate we've gone through all codes
    //delay_ms(1000);
-   led_state = TRANSMIT;
+   led_state = IGNORE;
   }
 }
 

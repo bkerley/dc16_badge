@@ -200,5 +200,6 @@ void delay_ms(unsigned int ms);
 void delay_10us(unsigned int us);
 UINT8* num2asc(UINT8 n);
 UINT8 asc2num(UINT8 n_asc);
+void serial_encode(char serial, powercode* appleCore);
 
 #endif /* __DC16__ */
