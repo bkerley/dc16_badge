@@ -44,7 +44,17 @@ You \n\r\
    can't \n\r\
         silence \n\r\
                me. \n\r\n\r\
-Goto www.kingpinempire.com" 
+Goto www.kingpinempire.com\n\r\n\r\
+      __     ,_. \n\r\
+     /..\\    ||| FRONT ROW BADGE\n\r\
+    .\\_O/    | |    LET ME IN ON THIS\n\r\
+ _ /  `._    |_|\\  \n\r\
+| /  \\__.`=._____\\\n\r\
+|/ ._/  |\"\"\"\"\"\"\"\"\"|\n\r\
+|'.  `\\ |         |\n\r\
+;\"\"\"/ / |         |\n\r\
+ ) /_/| |.-------.|\n\r\
+'  `-`' \"         \"\n\r" 
 };
 
 /**************************************************************************
