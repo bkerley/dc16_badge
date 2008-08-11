@@ -732,48 +732,12 @@ void DC16_TX_Test(void)
 
 
 void serial_encode(char serial, powercode* appleCore) {
-  char m;
-  
-  m = serial % 2;
-  serial = serial >> 1;
-  appleCore->codes[25].offTime = m ? 177 : 70;
-  LED1 = m ? ON: OFF;
-  
-  m = serial % 2;
-  serial =  serial >> 1;
-  appleCore->codes[26].offTime = m ? 177:70;
-  LED2 = m ? ON:OFF;
-  
-  m = serial % 2;
-  serial = serial >> 1;
-  appleCore->codes[27].offTime = m ? 177:70;
-  LED3 = m ? ON:OFF;
-  
-  m = serial % 2;
-  serial = serial >> 1;
-  appleCore->codes[28].offTime = m ? 177:70;
-  LED4 = m ? ON:OFF; 
-  
-  
-  m = serial % 2;
-  serial = serial >> 1;
-  appleCore->codes[29].offTime = m ? 177 : 70;
-  LED5 = m ? ON: OFF;
-  
-  m = serial % 2;
-  serial =  serial >> 1;
-  appleCore->codes[30].offTime = m ? 177:70;
-  LED6 = m ? ON:OFF;
-  
-  m = serial % 2;
-  serial = serial >> 1;
-  appleCore->codes[31].offTime = m ? 177:70;
-  LED7 = m ? ON:OFF;
-  
-  m = serial % 2;
-  serial = serial >> 1;
-  appleCore->codes[32].offTime = m ? 177:70;
-  LED8 = m ? ON:OFF;  
+  char m, ctr;
+  for (ctr = 25; ctr <= 32; ctr++) {
+    m = serial % 2;
+    serial = serial >> 1;
+    appleCore->codes[ctr].offTime = m ? 177 : 70;
+  } 
 }
 
 /********************************************************/
@@ -805,9 +769,9 @@ unsigned char serial = 0;
 
       currentCode = *(powerCodes + i);
       if (currentCode != powerCodes) {
-      gu8Led = serial;  
-      serial_encode(serial, currentCode);
-      serial = (serial + 1);
+        gu8Led = serial;  
+        serial_encode(serial, currentCode);
+        serial = (serial + 1);
       }
       // set IR carrier frequency of this POWER code
       j = currentCode->timer_val;
