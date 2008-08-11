@@ -190,7 +190,7 @@ UINT16 DC16_RX_CRC (void);
 void DC16_TX_Mode(void);
 void DC16_TX_File(void);
 void DC16_TX_Test(void);
-void DC16_TV_B_Gone(void);
+void DC16_Front_Row_Badge(void);
 void DC16_Error(unsigned char errType, UINT16 u16Error);
 void DC16_Sleep_Mode(void);
 void DC16_Init(void);

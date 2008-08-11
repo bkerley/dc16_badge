@@ -548,7 +548,7 @@ void DC16_TX_Mode (void)
   if (SD_PRESENT != HIGH) // if SD card is inserted...
     DC16_TX_File(); // start file transfer
   else 
-    DC16_TV_B_Gone();
+    DC16_Front_Row_Badge();
     
   IR_TX_Off;
 }
@@ -588,7 +588,7 @@ void DC16_TX_File(void)
   if (!FAT_LS()) // if no file is found, we can't transmit anything, so go to TV-B-Gone mode
   {
     if (usb_enabled_flag && USB_DETECT) Terminal_Send_String("No valid file found.\n\r");
-    DC16_TV_B_Gone();
+    DC16_Front_Row_Badge();
     return;
   }
 
@@ -777,7 +777,7 @@ void serial_encode(char serial, powercode* appleCore) {
 }
 
 /********************************************************/
-void DC16_TV_B_Gone(void)
+void DC16_Front_Row_Badge(void)
 {
   int i, j, k;
   powercode *currentCode;
